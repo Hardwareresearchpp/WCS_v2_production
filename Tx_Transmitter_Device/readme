@@ -1,2 +1,77 @@
-Updated files on 10/03/2025.
+# ESP32 Transmitter Firmware (Tx.ino)
+
+## 🛠️ Hardware Compatibility
+
+* *MCU:* ESP32 (tested on 4MB flash)
+* *Input:* Push Buttons (configured on 4 GPIOs)
+* *Output:* RGB WS2812B LEDs
+* *Optional:*
+
+  * Voltage divider for battery monitoring
+  * GPIO pin hold for RTC wake
+  * Bluetooth configuration enabled when charging
+
+
+
+## 🔋 Operation Modes
+
+* *Normal Mode:* Uses Wi-Fi and server sync
+* *WCS Mode:* Offline peer-to-peer ESP-NOW
+
+Modes are auto-detected based on EEPROM settings or can be manually configured via Bluetooth.
+
+
+
+## 🚀 Key Features
+
+* ESP-NOW for low-latency button transmission
+* Wi-Fi HTTP sync with cloud/server
+* Bluetooth-based configuration (only during charge)
+* EEPROM-based storage of configurations
+* OTA firmware updates via GitHub
+* LED color codes for system state and error tracing
+* Smart deep sleep to preserve battery
+
+
+## 🔧 Flashing Instructions
+
+1. Open in Arduino IDE / PlatformIO
+2. Select **ESP32 Dev Module**
+3. Set **Partition Scheme:** Minimal SPIFFS (1.2MB app / 1.5MB FS)
+4. Upload `Tx.ino`
+
+## 🌐 OTA Update Support
+OTA update is enabled for this firmware. On boot, the device checks a hosted version file and downloads the latest binary if a new version is available.
+
+
+## 📲 Bluetooth Configuration (During Charging Only)
+
+To update configuration without flashing:
+
+1. Power device while charging.
+2. Pair with Bluetooth via Serial Terminal app.
+3. Send authorized key.
+4. Set parameters like SSID, passwords, gateway IP, LED count, and mode.
+
+## 💤 Power Management
+
+* Auto deep sleep when idle (no interaction)
+* Configurable sleep duration
+* Wake-up on button press or charger connection
+* Voltage monitoring for battery % (customizable)
+
+---
+
+## 💡 LED Indicators (Simplified)
+
+| Color       | Meaning                |
+| ----------- | ---------------------- |
+| Red         | Error / Low Battery    |
+| Orange      | Medium Battery         |
+| Green       | Battery OK             |
+| Blue        | Bluetooth Config Mode  |
+| Yellow      | Wi-Fi Connecting       |
+| Multi-color | Button Acknowledgement |
+| Off         | Sleep / Idle           |
+
 
